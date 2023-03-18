@@ -1,75 +1,80 @@
-class FormValidation {
-    // takes in section tag as a parameter
-
-    // instance variables, constructor e.t.c ??
-    // constructor (this) {
-    //     this.parent// section instance variable
-    //     this.p      // paragraph instance variable
-    // }
+const form = document.getElementsByTagName("form")[0]
+const button = document.querySelector("#button")
 
 
-    styleMap = {
-        "color" : "hsl(0, 100%, 74%)",
-        "textAlign" : "right",
-        "margin" : "0",
-        "fontSize" : "0.75em",
-        "fontWeight" : "500",
-        "padding" : "0",
-    }
+styleMap = {
+    "color" : "hsl(0, 100%, 74%)",
+    "textAlign" : "right",
+    "margin" : "0",
+    "fontSize" : "0.75em",
+    "fontWeight" : "500",
+    "padding" : "0",
+}
 
 
     // methods
-    createParagraph(text) {
-        let p = document.createElement("p")
-        let pStyle = p.style
-        pStyle.color = styleMap["color"]
-        pStyle.textAlign = styleMap["textAlign"]
-        pStyle.margin = styleMap["margin"]
-        pStyle.fontSize = styleMap["fontSize"]
-        pStyle.fontWeight = styleMap["fontWeight"]
-        pStyle.padding = styleMap["padding"]
-        p.textContent = text
+function createAlertText(text) {
+    let p = document.createElement("p")
+    let pStyle = p.style
+    pStyle.color = styleMap["color"]
+    pStyle.textAlign = styleMap["textAlign"]
+    pStyle.margin = styleMap["margin"]
+    pStyle.fontSize = styleMap["fontSize"]
+    pStyle.fontWeight = styleMap["fontWeight"]
+    pStyle.padding = styleMap["padding"]
+    p.textContent = text
 
-        return p
-    }
+    return p
+}
 
-    insertParagraph(parentElement, p) {
-        parentElement.appendChild(p)
-    }
+function insertAlertText(parentElement, p) {
+    parentElement.appendChild(p)
+}
 
-    insertErrorIcon(parentElement, icon) {
-        // get the input tag
-        let inputElement = parentElement.firstElementChild
-        // insert the icon
-        inputElement.value = icon
-        // right align
-        inputElement.style.textAlign = "right"
-    }
+function insertErrorIcon(parentElement, icon) {
+    // get the input tag
+    let inputElement = parentElement.firstElementChild
+    // insert the icon
+    inputElement.value = icon
+    // right align
+    inputElement.style.textAlign = "right"
+}
 
-    validate(parentElement) {
-        // get the input tag
-        let inputElement = parentElement.firstElementChild
-        // get the input
-        let input = inputElement.value
+ // parentElement is the form tag
+function validate(parentElement) {
+    let validated = true
+    // // get the input tag
+    // let inputElement = parentElement.firstElementChild
+    // // get the input
+    // let input = inputElement.value
 
-        // special case for email
-        let ic = "icon/path/"
+    // iterate over the sections and validate the input
+
+    // TODO: To refactor the loop, add the icon error and final touches
+    for (let childIndex = 0; childIndex < (parentElement.childElementCount - 3); childIndex++) {
+        let child = parentElement.childNodes.item(childIndex)
+        const inputElement = child.firstElementChild
+        const input = inputElement.value
+        const ic = "icon/path/"
+
         if (inputElement.name == 'email') {
-            if (input !== "email regex") {
-                this.p = this.createParagraph("Looks like this is not an email")
-                this.insertParagraph(parentElement, this.p)
-                this.insertErrorIcon(parentElement, ic)
+            if (!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(input))) {
+                alertText = createAlertText("Looks like this is not an email")
+                insertAlertText(child, alertText)
+                insertErrorIcon(child, ic)
 
                 // inserting the email hint text "email@example/com"
                 inputElement.style.textAlign = "none"
 
                 // create a span element
                 let span = document.createElement("span")
-                span.textContent = "email@example/com"
+                span.innerHTML = "email@example/com"
 
                 let div = document.createElement("div")
                 div.appendChild(span)
-                div.appendChild(ic)
+                let dummyElement = document.createElement("span")
+                dummyElement.innerHTML = ic
+                div.appendChild(dummyElement)
 
                 let divStyle = div.style
                 //  TO ADJUST THESE STYLES ACCORDINGLY
@@ -84,38 +89,30 @@ class FormValidation {
 
                 // insert div into the input field
                 inputElement.value = div
-                return
+
+                validated = false
             }
         } else {
-            if (input.value.length == 0) {
-                this.p = this.createParagraph(inputElement.name + "must not be empty")
-                this.insertParagraph(parentElement, this.p)
+            if (input.length == 0) {
+                alertText = createAlertText(inputElement.name + " cannot be empty")
+                insertAlertText(child, alertText)
 
-                this.insertErrorIcon(parentElement, ic)
+                insertErrorIcon(child, ic)
+                validated = false
             }
         }
 
-
-
-        // add paragraph at the end of validation
     }
+
+    return validated
 }
 
 
 
 
 
-
-
-
-
-
-// TEST the FormValidation class
-
-const button = document.querySelector("#button")
-
 button.addEventListener('click', () => {
-    // classes in js
+    validate(form)
 })
 
 
