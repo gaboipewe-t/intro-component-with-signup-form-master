@@ -9,10 +9,11 @@ styleMap = {
     "fontSize" : "0.75em",
     "fontWeight" : "500",
     "padding" : "0",
+    "fontStyle" : "italic",
 }
 
 
-    // methods
+
 function createAlertText(text) {
     let p = document.createElement("p")
     let pStyle = p.style
@@ -22,6 +23,7 @@ function createAlertText(text) {
     pStyle.fontSize = styleMap["fontSize"]
     pStyle.fontWeight = styleMap["fontWeight"]
     pStyle.padding = styleMap["padding"]
+    pStyle.fontStyle = styleMap["fontStyle"]
     p.textContent = text
 
     return p
@@ -31,90 +33,70 @@ function insertAlertText(parentElement, p) {
     parentElement.appendChild(p)
 }
 
-function insertErrorIcon(parentElement, icon) {
+function insertErrorIcon(parentElement, iconPath) {
     // get the input tag
     let inputElement = parentElement.firstElementChild
+
+    // clear the place holder text of the input element
+    inputElement.placeholder = ""
+
+
     // insert the icon
-    inputElement.value = icon
-    // right align
-    inputElement.style.textAlign = "right"
+    inputElement.style.backgroundImage = `url(${iconPath})`
+    inputElement.style.backgroundRepeat = "no-repeat"
+    inputElement.style.backgroundPosition = "95% 50%"
+    // change the color of the border
+    inputElement.style.border = "2px solid hsl(0, 100%, 74%)"
 }
 
- // parentElement is the form tag
+
 function validate(parentElement) {
     let validated = true
-    // // get the input tag
-    // let inputElement = parentElement.firstElementChild
-    // // get the input
-    // let input = inputElement.value
+    for (let child of parentElement.children) {
+        if (child.className === "form-field") {
+            const inputElement = child.firstElementChild
+            const input = inputElement.value
 
-    // iterate over the sections and validate the input
-
-    // TODO: To refactor the loop, add the icon error and final touches
-    for (let childIndex = 0; childIndex < (parentElement.childElementCount - 3); childIndex++) {
-        let child = parentElement.childNodes.item(childIndex)
-        const inputElement = child.firstElementChild
-        const input = inputElement.value
-        const ic = "icon/path/"
-
-        if (inputElement.name == 'email') {
-            if (!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(input))) {
+            if (inputElement.name == 'email' && /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(input) === false) {
                 alertText = createAlertText("Looks like this is not an email")
                 insertAlertText(child, alertText)
-                insertErrorIcon(child, ic)
+                insertErrorIcon(child, "/images/icon-error.svg")
 
                 // inserting the email hint text "email@example/com"
-                inputElement.style.textAlign = "none"
-
-                // create a span element
-                let span = document.createElement("span")
-                span.innerHTML = "email@example/com"
-
-                let div = document.createElement("div")
-                div.appendChild(span)
-                let dummyElement = document.createElement("span")
-                dummyElement.innerHTML = ic
-                div.appendChild(dummyElement)
-
-                let divStyle = div.style
-                //  TO ADJUST THESE STYLES ACCORDINGLY
-                divStyle.margin = "0"
-                divStyle.padding = "100%"
-                divStyle.width = "100%"
-                divStyle.height = "100%"
-                // ABOVE
-                divStyle.display = "flex"
-                divStyle.flexDirection = "row"
-                divStyle.justifyContent = "space-between"
-
-                // insert div into the input field
-                inputElement.value = div
+                inputElement.placeholder = "email@example/com"
+                inputElement.style.setProperty("--c", "hsl(0, 100%, 74%)")
 
                 validated = false
-            }
-        } else {
-            if (input.length == 0) {
-                alertText = createAlertText(inputElement.name + " cannot be empty")
-                insertAlertText(child, alertText)
+            } else {
+                if (input.length == 0) {
+                    alertText = createAlertText(inputElement.name + " cannot be empty")
+                    insertAlertText(child, alertText)
 
-                insertErrorIcon(child, ic)
-                validated = false
+                    insertErrorIcon(child, "/images/icon-error.svg")
+                    validated = false
+                }
             }
+
         }
 
     }
-
     return validated
 }
 
 
 
-
+let clicked = false
 
 button.addEventListener('click', () => {
-    validate(form)
+    button.style.opacity = "0.6"
+    if (!clicked) {
+        clicked = true
+        if (validate(form)) {
+            // redirect to a new web page if input is validated
+            window.location.href = "http://frontendmentor.io";
+        }
+    }
 })
-
 
 
 

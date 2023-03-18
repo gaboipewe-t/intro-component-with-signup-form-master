@@ -54,6 +54,7 @@ h1 {
     margin-right: 0;
     text-align: center;
     border-radius: 0.5em;
+    box-shadow: 0 5px #999999;
 }
 
 #try-it > span {
@@ -61,13 +62,14 @@ h1 {
 }
 
 #form {
+    position: absolute;
     background-color: hsl(0, 100%, 100%);
     color: black;
     border-radius: 0.5em;
     width: 35em;
-    height: 27.5em;
-    box-shadow: 1em;
-    position: absolute;
+    min-height: 27.5em;
+    box-shadow: 0 5px #999999;
+    overflow: hidden;
 }
 
 form {
@@ -102,6 +104,7 @@ input {
     width: 29.45em;
     padding: 0.7em 0;
     margin: 1.5em 0;
+    box-shadow: 0 2px hsl(246, 25%, 77%);
 }
 
 #form > footer {
@@ -121,6 +124,10 @@ footer {
     position: absolute;
     bottom: 0;
 }
+
+::placeholder {
+    color: var(--c, hsl(246, 25%, 77%));
+  }
 
 @media screen and (max-width: 375px) {
     body {
