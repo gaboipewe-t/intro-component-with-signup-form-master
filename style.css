@@ -9,11 +9,9 @@ html {
 body {
     position: fixed;
     margin: 0;
-    min-width: 100vw;
     min-height: 100vh;
     display: grid;
     place-items: center;
-    /* to create a media query later on */
     background-image: url('/images/bg-intro-desktop.png');
     background-color: hsl(0, 100%, 74%);
     color: hsl(0, 100%, 100%);
