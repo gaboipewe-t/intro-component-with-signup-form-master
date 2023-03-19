@@ -66,7 +66,7 @@ I would like to continue honing my web development skills, priotizing mostly on 
 
 ### Useful resources
 
-- [Mozilla Developer Network](https://developer.mozilla.org/docs) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
+- [Mozilla Developer Network](https://developer.mozilla.org/docs) 
 
 ## Author
 
