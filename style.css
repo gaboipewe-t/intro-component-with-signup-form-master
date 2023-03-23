@@ -4,36 +4,40 @@ html {
     font-size: 16px;
     font-weight: 400;
     margin: 0;
+    --form-width: 35em;
 }
 
 body {
     position: fixed;
     margin: 0;
     min-height: 100vh;
-    width: 100%;
-    display: grid;
-    place-items: center;
+    min-width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     background-image: url('/images/bg-intro-desktop.png');
     background-color: hsl(0, 100%, 74%);
     color: hsl(0, 100%, 100%);
 }
 
+
 /* to complete this project while using the 1080x792 res */
 
 main {
+    position: absolute;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    position: absolute;
-    margin: 0em 3em;
-    align-content: center;
-    top: 20%;
+    justify-content:space-evenly;
+    align-items: center;
+    margin: 0;
+    top: 15%;
 }
 
 article {
     position: relative;
     width: 38%;
-    margin-top: 7em;
+    margin-top: 4em;
 }
 
 article > p {
@@ -47,15 +51,27 @@ h1 {
     line-height: 120%;
 }
 
+section {
+    margin: 0;
+    display: absolute;
+}
+
+#form-components {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: var(--form-width);
+}
+
 #try-it {
+    width: var(--form-width);
     background-color: hsl(248, 32%, 49%);
-    padding: 1em 7.2em;
-    margin-bottom: 1.25em;
-    margin-left: 0;
-    margin-right: 0;
     text-align: center;
     border-radius: 0.5em;
     box-shadow: 0 5px #999999;
+    margin-bottom: 1.5em;
+    padding: 1em 0;
 }
 
 #try-it > span {
@@ -63,12 +79,12 @@ h1 {
 }
 
 #form {
-    /* position: absolute; */
     background-color: hsl(0, 100%, 100%);
     color: black;
     border-radius: 0.5em;
-    margin: 0 2em;
-    min-height: 27.5em;
+    width: var(--form-width);
+    margin: 0;
+    min-height: 30em;
     box-shadow: 0 5px #999999;
     overflow: hidden;
 }
@@ -86,11 +102,12 @@ form {
 }
 
 input {
-    padding: 0.7em 1.5em;
+    margin: 0;
+    width: 34.75em;
+    padding: 1.1em 0;
     border-radius: 0.25em;
     font-weight: 600;
     font-family: 'Poppins', sans-serif;
-    width: 32em;
     margin-top: 1.5em;
     border: 2px solid hsl(246, 25%, 77%);
 }
@@ -102,8 +119,8 @@ input {
     border-radius: 0.25em;
     text-transform: uppercase;
     font-weight: 600;
-    width: 29.45em;
-    padding: 0.7em 0;
+    width: 29.25em;
+    padding: 0.75em 0;
     margin: 1.5em 0;
     box-shadow: 0 2px hsl(246, 25%, 77%);
 }
