@@ -187,15 +187,19 @@ input {
         font-weight: 500;
     }
 
+    #form-components {
+        min-height: auto;
+    }
+
     #try-it {
         width: 18em;
     }
 
     #form {
+        position: relative;
         margin: 0;
-        margin-top: 2em;
         width: 18em;
-        margin-bottom: 5em;
+        height:2em;
     }
 
     input {
