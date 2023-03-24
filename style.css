@@ -30,14 +30,13 @@ main {
     flex-direction: row;
     justify-content:space-evenly;
     align-items: center;
-    margin: 0;
+    margin: 0 15em;
     top: 15%;
 }
 
 article {
     position: relative;
     width: 38%;
-    margin-top: 4em;
 }
 
 article > p {
@@ -70,7 +69,6 @@ section {
     text-align: center;
     border-radius: 0.5em;
     box-shadow: 0 5px #999999;
-    margin-bottom: 1.5em;
     padding: 1em 0;
 }
 
@@ -84,6 +82,7 @@ section {
     border-radius: 0.5em;
     width: var(--form-width);
     margin: 0;
+    margin-top: 1.5em;
     min-height: 30em;
     box-shadow: 0 5px #999999;
     overflow: hidden;
@@ -99,16 +98,16 @@ form {
 
 .form-field {
     margin: 0;
+    margin-top: 1.5em;
 }
 
 input {
     margin: 0;
-    width: 34.75em;
-    padding: 1.1em 0;
+    width: 32em;
+    padding: 1.1em 1.5em;
     border-radius: 0.25em;
     font-weight: 600;
     font-family: 'Poppins', sans-serif;
-    margin-top: 1.5em;
     border: 2px solid hsl(246, 25%, 77%);
 }
 
